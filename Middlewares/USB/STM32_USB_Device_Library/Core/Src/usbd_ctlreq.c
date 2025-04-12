@@ -113,22 +113,22 @@ USBD_StatusTypeDef USBD_StdDevReq(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef
       switch (req->bRequest)
       {
         case USB_REQ_GET_DESCRIPTOR:
-					printf("usb req get descriptor\r\n");
+//					printf("usb req get descriptor\r\n");
           USBD_GetDescriptor(pdev, req);
           break;
 
         case USB_REQ_SET_ADDRESS:
-					printf("usb req set address\r\n");
+//					printf("usb req set address\r\n");
           USBD_SetAddress(pdev, req);
           break;
 
         case USB_REQ_SET_CONFIGURATION:
-					printf("usb req set configuration\r\n");
+//					printf("usb req set configuration\r\n");
           ret = USBD_SetConfig(pdev, req);
           break;
 
         case USB_REQ_GET_CONFIGURATION:
-					printf("usb req get configuration\r\n");
+//					printf("usb req get configuration\r\n");
           USBD_GetConfig(pdev, req);
           break;
 
@@ -611,7 +611,6 @@ static void USBD_SetAddress(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
       if (dev_addr != 0U)
       {
         pdev->dev_state = USBD_STATE_ADDRESSED;
-				printf("*********************************set addressed\r\n");
       }
       else
       {
@@ -714,7 +713,6 @@ static USBD_StatusTypeDef USBD_SetConfig(USBD_HandleTypeDef *pdev, USBD_SetupReq
       break;
   }
 
-	printf("************************************ret:%d\r\n",ret);
   return ret;
 }
 

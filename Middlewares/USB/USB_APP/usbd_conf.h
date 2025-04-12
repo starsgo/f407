@@ -28,8 +28,8 @@
 #include "./SYSTEM/sys/sys.h"
 #include "./SYSTEM/delay/delay.h"
 
-//#include "FreeRTOS.h"
-//#include "task.h"
+#include "FreeRTOS.h"
+#include "task.h"
 
 
 #include "stm32f4xx_hal_pcd.h"
@@ -84,6 +84,9 @@
 #else
 #define USBD_DbgLog(...)                         
 #endif
+
+
+extern PCD_HandleTypeDef g_hpcd;
 
 /* Exported functions ------------------------------------------------------- */
 

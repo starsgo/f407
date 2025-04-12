@@ -33,6 +33,9 @@
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 extern USBD_DescriptorsTypeDef MSC_Desc;
+extern uint8_t USBD_StringSerial[USB_SIZ_STRING_SERIAL];
+extern uint8_t USBD_LangIDDesc[USB_LEN_LANGID_STR_DESC];
+extern uint8_t USBD_StrDesc[USBD_MAX_STR_DESC_SIZ];
 
 #endif /* __USBD_DESC_H */
  

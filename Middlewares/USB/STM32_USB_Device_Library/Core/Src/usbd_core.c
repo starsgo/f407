@@ -298,17 +298,17 @@ USBD_StatusTypeDef USBD_LL_SetupStage(USBD_HandleTypeDef *pdev, uint8_t *psetup)
   switch (pdev->request.bmRequest & 0x1FU)
   {
     case USB_REQ_RECIPIENT_DEVICE:
-			printf("------------usb req recipient device\r\n");
+//			printf("------------usb req recipient device\r\n");
       ret = USBD_StdDevReq(pdev, &pdev->request);
       break;
 
     case USB_REQ_RECIPIENT_INTERFACE:
-			printf("------------usb req recipient interface\r\n");
+//			printf("------------usb req recipient interface\r\n");
       ret = USBD_StdItfReq(pdev, &pdev->request);
       break;
 
     case USB_REQ_RECIPIENT_ENDPOINT:
-			printf("------------usb req recipient endpoint\r\n");
+//			printf("------------usb req recipient endpoint\r\n");
       ret = USBD_StdEPReq(pdev, &pdev->request);
       break;
 

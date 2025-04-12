@@ -72,23 +72,23 @@ ARM Macro Assembler    Page 2
    43 00000400         
    44 00000400         ;未用到编译器自带的内存管理(malloc,free等)，设置Heap_Szi
                        e为0
-   45 00000400 00001000 
+   45 00000400 00000000 
                        Heap_Size
-                               EQU              0x00001000
+                               EQU              0x00000000
    46 00000400         
    47 00000400                 AREA             HEAP, NOINIT, READWRITE, ALIGN=
 3
    48 00000000         __heap_base
    49 00000000         Heap_Mem
                                SPACE            Heap_Size
-   50 00001000         __heap_limit
-   51 00001000         
-   52 00001000                 PRESERVE8
-   53 00001000                 THUMB
-   54 00001000         
-   55 00001000         
-   56 00001000         ; Vector Table Mapped to Address 0 at Reset
-   57 00001000                 AREA             RESET, DATA, READONLY
+   50 00000000         __heap_limit
+   51 00000000         
+   52 00000000                 PRESERVE8
+   53 00000000                 THUMB
+   54 00000000         
+   55 00000000         
+   56 00000000         ; Vector Table Mapped to Address 0 at Reset
+   57 00000000                 AREA             RESET, DATA, READONLY
    58 00000000                 EXPORT           __Vectors
    59 00000000                 EXPORT           __Vectors_End
    60 00000000                 EXPORT           __Vectors_Size
@@ -835,8 +835,8 @@ ARM Macro Assembler    Page 13
   416 00000028         
   417 00000028 4805            LDR              R0, =  Heap_Mem
   418 0000002A 4906            LDR              R1, =(Stack_Mem + Stack_Size)
-  419 0000002C 4A06            LDR              R2, = (Heap_Mem +  Heap_Size)
-  420 0000002E 4B07            LDR              R3, = Stack_Mem
+  419 0000002C 4A04            LDR              R2, = (Heap_Mem +  Heap_Size)
+  420 0000002E 4B06            LDR              R3, = Stack_Mem
   421 00000030 4770            BX               LR
   422 00000032         
   423 00000032 00 00           ALIGN
@@ -855,7 +855,6 @@ ARM Macro Assembler    Page 14
               00000000 
               00000000 
               00000400 
-              00001000 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=..\..\output\startup_stm32f407xx.d -o..\..\output\startup_st
@@ -937,7 +936,7 @@ es\arm\startup_stm32f407xx.s
    Uses
       None
 Comment: __heap_base unused
-__heap_limit 00001000
+__heap_limit 00000000
 
 Symbol: __heap_limit
    Definitions
@@ -2228,7 +2227,7 @@ Comment: __user_initial_stackheap used once
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Absolute symbols
 
-Heap_Size 00001000
+Heap_Size 00000000
 
 Symbol: Heap_Size
    Definitions

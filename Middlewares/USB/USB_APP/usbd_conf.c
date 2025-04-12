@@ -27,7 +27,7 @@
 #include "usbd_def.h"
 #include "./SYSTEM/sys/sys.h"
 #include "./SYSTEM/usart/usart.h"
-
+#include "freertos_handler.h"
 
 /* PCD定义 */
 PCD_HandleTypeDef g_hpcd;
@@ -59,7 +59,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
         gpio_init_struct.Alternate = GPIO_AF10_OTG_FS;       /* 复用为OTG1_FS */
         HAL_GPIO_Init(GPIOA, &gpio_init_struct);             /* 初始化PA11和PA12引脚 */
 
-        HAL_NVIC_SetPriority(OTG_FS_IRQn, 0, 3);             /* 抢占优先级设置为0,响应优先级为3 */
+        HAL_NVIC_SetPriority(OTG_FS_IRQn, 8, 3);             /* 抢占优先级设置为0,响应优先级为3 */
         HAL_NVIC_EnableIRQ(OTG_FS_IRQn);                     /* 使能OTG FS中断 */
     }
     else if (hpcd->Instance == USB_OTG_HS)
@@ -76,8 +76,19 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
  */
 void OTG_FS_IRQHandler(void)
 {
-    HAL_PCD_IRQHandler(&g_hpcd);
+		UBaseType_t uxSavedInterruptStatus;
+    uxSavedInterruptStatus = taskENTER_CRITICAL_FROM_ISR();
+    
+//		BaseType_t pxHigherPriorityTaskWoken;
+//		xSemaphoreGiveFromISR(usdb_handler_binarysema,&pxHigherPriorityTaskWoken);
+//		portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
+	
+    HAL_PCD_IRQHandler(&g_hpcd);	
+		taskEXIT_CRITICAL_FROM_ISR( uxSavedInterruptStatus );
+	
+
 }
+
 
 
 /******************************************************************************************/
@@ -166,7 +177,7 @@ void HAL_PCD_ResetCallback(PCD_HandleTypeDef *hpcd)
 void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
 {
     g_device_state = 0;
-    printf("Device In suspend mode.\r\n");
+//    printf("Device In suspend mode.\r\n");
     USBD_LL_Suspend(hpcd->pData);
 }
 
@@ -424,7 +435,7 @@ uint8_t USBD_LL_IsStallEP(USBD_HandleTypeDef *pdev, uint8_t ep_addr)
 USBD_StatusTypeDef USBD_LL_SetUSBAddress(USBD_HandleTypeDef *pdev, uint8_t dev_addr)
 {
     g_device_state = 1; /* 能执行到该函数,说明USB连接成功了 */
-	printf("USBD_LL_SetUSBAddress\r\n");
+//	printf("USBD_LL_SetUSBAddress\r\n");
 
     HAL_PCD_SetAddress(pdev->pData, dev_addr);
     return USBD_OK;

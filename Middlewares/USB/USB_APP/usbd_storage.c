@@ -156,7 +156,7 @@ int8_t STORAGE_GetCapacity (uint8_t lun, uint32_t *block_num, uint16_t *block_si
             HAL_SD_GetCardInfo(&g_sdcard_handler, &g_sd_card_info_handle);
             *block_num = g_sd_card_info_handle.LogBlockNbr - 1;
             *block_size = g_sd_card_info_handle.LogBlockSize;
-								printf("Storage_getCapticaty,res");
+//								printf("Storage_getCapticaty,res");
 
             break;
     }
@@ -176,7 +176,7 @@ int8_t STORAGE_GetCapacity (uint8_t lun, uint32_t *block_num, uint16_t *block_si
 int8_t  STORAGE_IsReady (uint8_t lun)
 {
     g_usb_state_reg |= 0X10;    /* ±ê¼ÇÂÖÑ¯ */
-					printf("Storage_isready");
+//					printf("Storage_isready");
 
     return 0;
 }
@@ -220,14 +220,14 @@ int8_t STORAGE_Read (uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_
 
         case 1: /* SD¿¨ */
             res = sd_read_disk(buf, blk_addr, blk_len);
-								printf("Storage_read,res:%c",res);
+//								printf("Storage_read,res:%c",res);
 
             break;
     }
 
     if (res)
     {
-        printf("rerr:%d,%d", lun, res);
+//        printf("rerr:%d,%d", lun, res);
         g_usb_state_reg |= 0X08;    /* ¶Á´íÎó! */
     }
 
@@ -259,14 +259,14 @@ int8_t STORAGE_Write (uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk
 
         case 1: /* SD¿¨ */
             res = sd_write_disk(buf, blk_addr, blk_len);
-				printf("Storage_write,res:%c",res);
+//				printf("Storage_write,res:%c",res);
             break;
     }
 
     if (res)
     {
         g_usb_state_reg |= 0X04;    /* Ð´´íÎó! */
-        printf("werr:%d,%d", lun, res);
+//        printf("werr:%d,%d", lun, res);
     }
 
     return res;

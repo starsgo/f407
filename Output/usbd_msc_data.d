@@ -75,3 +75,13 @@
 ..\..\output\usbd_msc_data.o: ..\..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h
 ..\..\output\usbd_msc_data.o: ..\..\Drivers\CMSIS\Include\core_cm4.h
 ..\..\output\usbd_msc_data.o: ..\..\Drivers\./SYSTEM/delay/delay.h
+..\..\output\usbd_msc_data.o: ..\..\Middlewares\FreeRTOS\include\FreeRTOS.h
+..\..\output\usbd_msc_data.o: ..\..\User\FreeRTOSConfig.h
+..\..\output\usbd_msc_data.o: ..\..\Drivers\./SYSTEM/usart/usart.h
+..\..\output\usbd_msc_data.o: ..\..\Middlewares\FreeRTOS\include\projdefs.h
+..\..\output\usbd_msc_data.o: ..\..\Middlewares\FreeRTOS\include\portable.h
+..\..\output\usbd_msc_data.o: ..\..\Middlewares\FreeRTOS\include\deprecated_definitions.h
+..\..\output\usbd_msc_data.o: ..\..\Middlewares\FreeRTOS\portable\RVDS\ARM_CM4F\portmacro.h
+..\..\output\usbd_msc_data.o: ..\..\Middlewares\FreeRTOS\include\mpu_wrappers.h
+..\..\output\usbd_msc_data.o: ..\..\Middlewares\FreeRTOS\include\task.h
+..\..\output\usbd_msc_data.o: ..\..\Middlewares\FreeRTOS\include\list.h

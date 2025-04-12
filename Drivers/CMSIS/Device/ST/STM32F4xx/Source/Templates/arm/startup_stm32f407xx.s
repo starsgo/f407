@@ -42,7 +42,7 @@ __initial_sp
 ; </h>
 
 ;未用到编译器自带的内存管理(malloc,free等)，设置Heap_Szie为0
-Heap_Size       EQU     0x00001000
+Heap_Size       EQU     0x00000000
 
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3
 __heap_base

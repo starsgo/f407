@@ -1093,7 +1093,6 @@ void HAL_PCD_IRQHandler(PCD_HandleTypeDef *hpcd)
       }
       else if (((temp & USB_OTG_GRXSTSP_PKTSTS) >> 17) ==  STS_SETUP_UPDT)
       {
-				printf("setup interrupt\r\n");
         (void)USB_ReadPacket(USBx, (uint8_t *)hpcd->Setup, 8U);
         ep->xfer_count += (temp & USB_OTG_GRXSTSP_BCNT) >> 4;
       }
@@ -1287,7 +1286,7 @@ void HAL_PCD_IRQHandler(PCD_HandleTypeDef *hpcd)
     /* Handle Reset Interrupt */
     if (__HAL_PCD_GET_FLAG(hpcd, USB_OTG_GINTSTS_USBRST))
     {
-			printf("usb reset\r\n");
+//			printf("usb reset\r\n");
       USBx_DEVICE->DCTL &= ~USB_OTG_DCTL_RWUSIG;
       (void)USB_FlushTxFifo(hpcd->Instance, 0x10U);
 
@@ -1349,7 +1348,7 @@ void HAL_PCD_IRQHandler(PCD_HandleTypeDef *hpcd)
 #if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
       hpcd->ResetCallback(hpcd);
 #else
-			printf("reset callback\r\n");
+//			printf("reset callback\r\n");
       HAL_PCD_ResetCallback(hpcd);
 #endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
 
